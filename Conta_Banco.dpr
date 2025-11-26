@@ -2,7 +2,8 @@ program Conta_Banco;
 
 uses
   Vcl.Forms,
-  TelaPrincipal in 'TelaPrincipal.pas' {Form1};
+  TelaPrincipal in 'TelaPrincipal.pas' {Form1},
+  UnitContaBancaria in 'UnitContaBancaria.pas';
 
 {$R *.res}
 
