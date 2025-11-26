@@ -134,21 +134,19 @@ object frmTelaPrincipal: TfrmTelaPrincipal
     Font.Style = []
     ParentFont = False
     TabOrder = 2
-    object edtSaldo: TEdit
+    object lblSaldo: TLabel
       Left = 24
-      Top = 48
+      Top = 64
+      Width = 51
+      Height = 25
+      Caption = 'Saldo:'
+    end
+    object edtSaldo: TEdit
+      Left = 112
+      Top = 56
       Width = 201
       Height = 33
       TabOrder = 0
-    end
-    object btnSaldo: TButton
-      Left = 376
-      Top = 56
-      Width = 137
-      Height = 25
-      Caption = 'Ver Saldo'
-      TabOrder = 1
-      OnClick = btnSaldoClick
     end
   end
 end

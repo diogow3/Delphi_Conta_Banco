@@ -21,9 +21,8 @@ type
     btnDepositar: TButton;
     btnSacar: TButton;
     edtSaldo: TEdit;
-    btnSaldo: TButton;
+    lblSaldo: TLabel;
     procedure btnCriarContaClick(Sender: TObject);
-    procedure btnSaldoClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnDepositarClick(Sender: TObject);
     procedure btnSacarClick(Sender: TObject);
@@ -46,21 +45,34 @@ begin
   Conta:= TContaBancaria.Create;
   Conta.Numero:= StrToInt(edtNumero.Text);
   Conta.Titular:= edtTitular.Text;
+  edtSaldo.Text := Conta.Saldo.ToString;
+  ShowMessage('Conta - Titular: ' + Conta.Titular + ' Numero: ' + Conta.Numero.ToString + ' Criada');
 end;
 
 procedure TfrmTelaPrincipal.btnDepositarClick(Sender: TObject);
 begin
-  Conta.Depositar(StrToFloat(edtDepositar.Text));
+  try
+    Conta.Depositar(StrToFloat(edtDepositar.Text));
+    edtSaldo.Text := Conta.Saldo.ToString;
+  except
+    on E: EConvertError do
+      ShowMessage('Digite um valor numérico');
+    on E: Exception do
+      ShowMessage(E.Message);
+  end;
 end;
 
 procedure TfrmTelaPrincipal.btnSacarClick(Sender: TObject);
 begin
-  Conta.Sacar(StrToFloat(edtSacar.Text));
-end;
-
-procedure TfrmTelaPrincipal.btnSaldoClick(Sender: TObject);
-begin
-  edtSaldo.Text := Conta.Saldo.ToString;
+    try
+    Conta.Sacar(StrToFloat(edtSacar.Text));
+    edtSaldo.Text := Conta.Saldo.ToString;
+  except
+    on E: EConvertError do
+      ShowMessage('Digite um valor numérico');
+    on E: Exception do
+      ShowMessage(E.Message);
+  end;
 end;
 
 procedure TfrmTelaPrincipal.FormDestroy(Sender: TObject);
