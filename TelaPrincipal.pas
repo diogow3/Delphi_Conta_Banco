@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, UnitContaBancaria;
 
 type
-  TForm1 = class(TForm)
+  TfrmTelaPrincipal = class(TForm)
     Label1: TLabel;
     Label2: TLabel;
     GroupBox1: TGroupBox;
@@ -24,6 +24,9 @@ type
     btnSaldo: TButton;
     procedure btnCriarContaClick(Sender: TObject);
     procedure btnSaldoClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure btnDepositarClick(Sender: TObject);
+    procedure btnSacarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,28 +34,38 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frmTelaPrincipal: TfrmTelaPrincipal;
   Conta: TContaBancaria;
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.btnCriarContaClick(Sender: TObject);
+procedure TfrmTelaPrincipal.btnCriarContaClick(Sender: TObject);
 begin
   Conta:= TContaBancaria.Create;
-
-  try
-    Conta.Numero:= StrToInt(edtNumero.Text);
-    Conta.Titular:= edtTitular.Text;
-  finally
-    Conta.Free;
-  end;
+  Conta.Numero:= StrToInt(edtNumero.Text);
+  Conta.Titular:= edtTitular.Text;
 end;
 
-procedure TForm1.btnSaldoClick(Sender: TObject);
+procedure TfrmTelaPrincipal.btnDepositarClick(Sender: TObject);
 begin
-  edtSaldo.Text:= FloatToStr(Conta.Saldo);
+  Conta.Depositar(StrToFloat(edtDepositar.Text));
+end;
+
+procedure TfrmTelaPrincipal.btnSacarClick(Sender: TObject);
+begin
+  Conta.Sacar(StrToFloat(edtSacar.Text));
+end;
+
+procedure TfrmTelaPrincipal.btnSaldoClick(Sender: TObject);
+begin
+  edtSaldo.Text := Conta.Saldo.ToString;
+end;
+
+procedure TfrmTelaPrincipal.FormDestroy(Sender: TObject);
+begin
+  Conta.Free;
 end;
 
 end.

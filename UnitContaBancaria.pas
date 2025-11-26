@@ -32,16 +32,24 @@ type
       procedure Sacar(Valor: Double);
       function ExibirSaldo: Double;
 
+      constructor Create;
+
   end;
 
 implementation
 
 { TContaBancaria }
 
+constructor TContaBancaria.Create;
+begin
+  inherited;
+  FSaldo:= 0;
+end;
+
 procedure TContaBancaria.Depositar(Valor: Double);
 begin
   if Valor >= 0 then
-    FSaldo:=+ Valor
+    FSaldo:= FSaldo + Valor
   else
     raise Exception.Create('O Valor deve ser positivo');
 end;
@@ -69,7 +77,7 @@ end;
 procedure TContaBancaria.Sacar(Valor: Double);
 begin
   if Valor < Saldo then
-    FSaldo:=- Valor
+    FSaldo:= FSaldo - Valor
   else
     raise Exception.Create('O Valor deve ser igual ou menor que o saldo');
 end;

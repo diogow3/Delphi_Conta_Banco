@@ -1,7 +1,7 @@
-object Form1: TForm1
+object frmTelaPrincipal: TfrmTelaPrincipal
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Tela Principal'
   ClientHeight = 693
   ClientWidth = 630
   Color = clBtnFace
@@ -10,6 +10,7 @@ object Form1: TForm1
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnDestroy = FormDestroy
   TextHeight = 15
   object GroupBox1: TGroupBox
     Left = 32
@@ -108,6 +109,7 @@ object Form1: TForm1
       Height = 25
       Caption = 'Depositar'
       TabOrder = 2
+      OnClick = btnDepositarClick
     end
     object btnSacar: TButton
       Left = 376
@@ -116,6 +118,7 @@ object Form1: TForm1
       Height = 25
       Caption = 'Sacar'
       TabOrder = 3
+      OnClick = btnSacarClick
     end
   end
   object GroupBox3: TGroupBox
