@@ -2,6 +2,9 @@ unit UnitContaBancaria;
 
 interface
 
+uses
+  System.SysUtils;
+
 type
   TContaBancaria = class
     private
@@ -37,7 +40,10 @@ implementation
 
 procedure TContaBancaria.Depositar(Valor: Double);
 begin
-  FSaldo:=+ Valor;
+  if Valor >= 0 then
+    FSaldo:=+ Valor
+  else
+    raise Exception.Create('O Valor deve ser positivo');
 end;
 
 function TContaBancaria.ExibirSaldo: Double;
@@ -62,7 +68,10 @@ end;
 
 procedure TContaBancaria.Sacar(Valor: Double);
 begin
-  FSaldo:=- Valor;
+  if Valor < Saldo then
+    FSaldo:=- Valor
+  else
+    raise Exception.Create('O Valor deve ser igual ou menor que o saldo');
 end;
 
 procedure TContaBancaria.SetNumero(numero: integer);
