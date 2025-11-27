@@ -76,6 +76,9 @@ end;
 
 procedure TContaBancaria.Sacar(Valor: Double);
 begin
+  if Valor < 0 then
+    raise Exception.Create('O valor deve ser positivo');
+
   if Valor < Saldo then
     FSaldo:= FSaldo - Valor
   else
